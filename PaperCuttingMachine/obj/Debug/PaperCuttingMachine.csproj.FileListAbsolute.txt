@@ -1,0 +1,10 @@
+C:\Users\yumas\Desktop\PaperCuttingMachine\PaperCuttingMachine\bin\Debug\PaperCuttingMachine.exe.config
+C:\Users\yumas\Desktop\PaperCuttingMachine\PaperCuttingMachine\bin\Debug\PaperCuttingMachine.exe
+C:\Users\yumas\Desktop\PaperCuttingMachine\PaperCuttingMachine\bin\Debug\PaperCuttingMachine.pdb
+C:\Users\yumas\Desktop\PaperCuttingMachine\PaperCuttingMachine\obj\Debug\PaperCuttingMachine.csprojAssemblyReference.cache
+C:\Users\yumas\Desktop\PaperCuttingMachine\PaperCuttingMachine\obj\Debug\PaperCuttingMachine.Main.resources
+C:\Users\yumas\Desktop\PaperCuttingMachine\PaperCuttingMachine\obj\Debug\PaperCuttingMachine.Properties.Resources.resources
+C:\Users\yumas\Desktop\PaperCuttingMachine\PaperCuttingMachine\obj\Debug\PaperCuttingMachine.csproj.GenerateResource.cache
+C:\Users\yumas\Desktop\PaperCuttingMachine\PaperCuttingMachine\obj\Debug\PaperCuttingMachine.csproj.CoreCompileInputs.cache
+C:\Users\yumas\Desktop\PaperCuttingMachine\PaperCuttingMachine\obj\Debug\PaperCuttingMachine.exe
+C:\Users\yumas\Desktop\PaperCuttingMachine\PaperCuttingMachine\obj\Debug\PaperCuttingMachine.pdb
