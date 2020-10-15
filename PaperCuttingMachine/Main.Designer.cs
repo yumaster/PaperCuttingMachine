@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.btn_Print = new System.Windows.Forms.Button();
+            this.txt_Print = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btn_Print
             // 
-            this.btn_Print.Location = new System.Drawing.Point(312, 206);
+            this.btn_Print.Location = new System.Drawing.Point(196, 435);
             this.btn_Print.Name = "btn_Print";
             this.btn_Print.Size = new System.Drawing.Size(75, 23);
             this.btn_Print.TabIndex = 0;
@@ -41,21 +42,32 @@
             this.btn_Print.UseVisualStyleBackColor = true;
             this.btn_Print.Click += new System.EventHandler(this.btn_Print_Click);
             // 
-            // Form1
+            // txt_Print
+            // 
+            this.txt_Print.Location = new System.Drawing.Point(12, 12);
+            this.txt_Print.Multiline = true;
+            this.txt_Print.Name = "txt_Print";
+            this.txt_Print.Size = new System.Drawing.Size(456, 417);
+            this.txt_Print.TabIndex = 1;
+            // 
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(480, 470);
+            this.Controls.Add(this.txt_Print);
             this.Controls.Add(this.btn_Print);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Main";
+            this.Text = "切纸打印";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Button btn_Print;
+        private System.Windows.Forms.TextBox txt_Print;
     }
 }
 

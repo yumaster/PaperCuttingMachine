@@ -1,9 +1,15 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace PaperCuttingMachine
 {
+    /// <summary>
+    /// TxPrnMod.dll 打印机dll基础接口封装
+    /// </summary>
     public static class PrinterHelper
     {
+        #region TxPrnMod.dll 打印机dll基础接口封装
         /// <summary>
         /// 打开打印机连接
         /// 这个函数是在使用打印机时，第一要用到的函数
@@ -125,6 +131,8 @@ namespace PaperCuttingMachine
         [DllImport("TxPrnMod.dll", EntryPoint = "TxReadPrinter")]
         public static extern int TxReadPrinter(ref char[] buf, int len);
 
+        [DllImport("TxPrnMod.dll", CharSet = CharSet.Ansi)]
+        public extern static bool TxPrintImage(string str);//打印IMG 
         /// <summary>
         /// 特殊操作
         /// 执行特殊功能。就是向打印机发送设置指令，或着走纸指令，定位指令等，具体要见下面做
@@ -333,5 +341,92 @@ namespace PaperCuttingMachine
             int re = TxReadPrinter(ref bufR, 1);
             return re > 0;
         }
+        #endregion
+
+        #region 打印操作方法封装
+        public static bool PrintByTxt(string txt)
+        {
+            bool ret = false;
+            try
+            {
+                if (PrinterHelper.TxOpenPrinter(1, 0))
+                {
+                    int status = PrinterHelper.TxGetStatus();
+                    if (status == 88)
+                    {
+                        //无故障情况下才执行打印
+                        PrinterHelper.TxInit();
+
+                        PrinterHelper.TxResetFont();
+                        PrinterHelper.TxOutputStringLn(txt);
+
+                        //string urlimg = Application.StartupPath + "\\File\\zhangyu.jpg";
+                        //bool retImg = PrinterHelper.TxPrintImage(urlimg);
+                        PrinterHelper.TxDoFunction(10, 240, 0);//走纸30毫米
+                        PrinterHelper.TxDoFunction(12, 2, 40);//走纸30毫米
+
+                        //Thread.Sleep(1000);
+                        bool isSuccess = PrinterHelper.CheckIsPrintSuccess();
+                        if (isSuccess)
+                        {
+                            ret = true;
+                        }
+                        else
+                        {
+                            //MessageBox.Show("打印失败，有可能是打印机内纸不够、打印机断电或其他异常，请确保打印机接上电源并且其内有足够的纸，然后执行一次关闭打印机后再打开打印机。");
+                            return false;
+                        }
+                    }
+                    else if (status == 56)
+                    {
+                        //MessageBox.Show("检测到打印机内没有纸，如果有纸，请执行一次关闭打印机后再打开打印机。");
+                        return false;
+                    }
+                    else
+                    {
+                        //MessageBox.Show("打印机繁忙或异常，请尝试执行一次关闭打印机后再打开打印机，可能能解决问题。");
+                        return false;
+                    }
+                }
+                else
+                {
+                    //MessageBox.Show("无法连接打印机，请确保打印机电源打开并且正常连接到电脑");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ret = false;
+                //MessageBox.Show("打印时出现异常");
+                return false;
+            }
+            finally
+            {
+                PrinterHelper.TxClosePrinter();
+            }
+            return ret;
+        }
+
+        public static string GetTmpAndPara(string xmlPath, string para)
+        {
+            string[] paraArr = para.Split('&');
+
+            string templateValue = XmlHelper.GetNodeValue(xmlPath, "template");
+            string paracountValue = XmlHelper.GetNodeValue(xmlPath, "paracount");
+            if (paraArr.Count() != int.Parse(paracountValue))//如果传过来的参数与配置模板参数不符
+            {
+                return "";
+            }
+            else
+            {
+
+                for (int i = 0; i < paraArr.Length; i++)
+                {
+                    templateValue = templateValue.Replace("[" + i + "]", paraArr[i]);
+                }
+                return templateValue;
+            }
+        }
+        #endregion
     }
 }
