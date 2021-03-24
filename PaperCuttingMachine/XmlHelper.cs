@@ -5,7 +5,7 @@ namespace PaperCuttingMachine
     public class XmlHelper
     {
         /// <summary>
-        ///     读取XML资源中的指定节点内容
+        /// 读取XML资源中的指定节点内容
         /// </summary>
         /// <param name="source">XML资源</param>
         /// <param name="xmlType">XML资源类型：文件，字符串</param>
@@ -19,6 +19,5 @@ namespace PaperCuttingMachine
             var selectSingleNode = documentElement?.SelectSingleNode("//" + nodeName);
             return selectSingleNode?.InnerText;
         }
-
     }
 }

@@ -14,7 +14,7 @@ namespace PaperCuttingMachine
 
         private void btn_Print_Click(object sender, EventArgs e)
         {
-            string printTxt = PrinterHelper.GetTmpAndPara(Application.StartupPath + "\\XmlFile\\TempOne.xml", "13700700960&豫N 81996&张宇&#95");
+            string printTxt = PrinterHelper.GetTmpAndPara(Application.StartupPath + "\\XmlFile\\TempOne.xml", "13700700960&豫N 81996&土伦&#95");
             if(!string.IsNullOrEmpty(printTxt))
             {
                 bool ret = PrinterHelper.PrintByTxt(printTxt);
